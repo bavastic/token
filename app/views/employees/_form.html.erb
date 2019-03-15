@@ -1,0 +1,32 @@
+<%= form_with(model: employee, local: true, url: (employee.new_record? ? [@company, employee]: employee), builder: BootstrapFormBuilder) do |form| %>
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+      <% employee.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.group :name do %>
+    <%= form.label :first_name, 'First Name' %>
+    <%= form.text_field :first_name %>
+  <% end %>
+
+  <%= form.group :name do %>
+    <%= form.label :last_name, 'Last Name' %>
+    <%= form.text_field :last_name %>
+  <% end %>
+
+  <%= form.group :company_id do %>
+    <%= form.label :company_id %>
+    <%= form.select :company_id, @companies.sort_by(&:name).map { |c| [c.name, c.id] } %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

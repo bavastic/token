@@ -1,0 +1,32 @@
+<%= form_with(model: client, local: true, url: (client.new_record? ? [@employee, client]: client), builder: BootstrapFormBuilder) do |form| %>
+  <% if client.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+
+      <ul>
+      <% client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.group :first_name do %>
+    <%= form.label :first_name, 'First Name' %>
+    <%= form.text_field :first_name %>
+  <% end %>
+
+  <%= form.group :last_name do %>
+    <%= form.label :last_name, 'Last Name' %>
+    <%= form.text_field :last_name %>
+  <% end %>
+
+  <%= form.group :employee_id do %>
+    <%= form.label :employee_id %>
+    <%= form.select :employee_id, @company_employees.sort_by(&:full_name).map { |e| [e.full_name, e.id] } %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<div class="float-right">
+    <%= link_to 'New Company', new_company_path, class: "btn btn-primary btn-sm m-2" %>
+</div>
+
+<h1>Companies</h1>
+
+<div class="companies">
+    <%= render partial: "company", collection: @companies %>
+</div>
